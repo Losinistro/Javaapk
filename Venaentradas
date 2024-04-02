@@ -1,0 +1,104 @@
+package ventaentradas;
+
+import java.util.Scanner;
+
+public class VentaEntradas {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double estudianteVIP = 13000;
+        double generalVIP = 25000;
+        double estudiantePlateaBaja = 10000;
+        double generalPlateaBaja = 19000;
+        double estudiantePlateaAlta = 9000;
+        double generalPlateaAlta = 11000;
+        double estudiantePalco = 6500;
+        double generalPalco = 7200;
+        char continuar = 'S';
+
+        while (continuar == 'S') {
+            System.out.println("Bienvenido al sistema de venta de entradas del Teatro Moro.");
+            System.out.println("Menu principal:");
+            System.out.println("1. Comprar entrada");
+            System.out.println("2. Salir");
+
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1 -> {
+                    System.out.println("Seleccione el tipo de entrada:");
+                    System.out.println("1. VIP (Estudiante: $13000 | Publico General: $25000)");
+                    System.out.println("2. Platea baja (Estudiante: $10000 | Publico General: $19000)");
+                    System.out.println("3. Platea alta (Estudiante: $9000 | Publico General: $11000)");
+                    System.out.println("4. Palco (Estudiante: $6500 | Publico General: $7200)");
+                    int tipoEntrada = scanner.nextInt();
+
+                    System.out.println("Ingrese la cantidad de entradas:");
+                    int cantidadEntradas = scanner.nextInt();
+
+                    System.out.println("¿Es usted estudiante? (S/N):");
+                    char esEstudiante = scanner.next().charAt(0);
+
+                    String tipoEntradaStr = "";
+                    double totalPagar = 0;
+
+                    switch (tipoEntrada) {
+                        case 1 -> {
+                            if (esEstudiante == 'S') {
+                                totalPagar = estudianteVIP * cantidadEntradas * 0.9;
+                                tipoEntradaStr = "VIP Estudiante";
+                            } else {
+                                totalPagar = generalVIP * cantidadEntradas;
+                                tipoEntradaStr = "VIP General";
+                            }
+                        }
+                        case 2 -> {
+                            if (esEstudiante == 'S') {
+                                totalPagar = estudiantePlateaBaja * cantidadEntradas * 0.9;
+                                tipoEntradaStr = "Platea Baja Estudiante";
+                            } else {
+                                totalPagar = generalPlateaBaja * cantidadEntradas;
+                                tipoEntradaStr = "Platea Baja General";
+                            }
+                        }
+                        case 3 -> {
+                            if (esEstudiante == 'S') {
+                                totalPagar = estudiantePlateaAlta * cantidadEntradas * 0.9;
+                                tipoEntradaStr = "Platea Alta Estudiante";
+                            } else {
+                                totalPagar = generalPlateaAlta * cantidadEntradas;
+                                tipoEntradaStr = "Platea Alta General";
+                            }
+                        }
+                        case 4 -> {
+                            if (esEstudiante == 'S') {
+                                totalPagar = estudiantePalco * cantidadEntradas * 0.9;
+                                tipoEntradaStr = "Palco Estudiante";
+                            } else {
+                                totalPagar = generalPalco * cantidadEntradas;
+                                tipoEntradaStr = "Palco General";
+                            }
+                        }
+                        default -> {
+                            System.out.println("Tipo de entrada invalido");
+                            continue; // Volver al menu principal
+                        }
+                    }
+
+                    System.out.println("Resumen de compra:");
+                    System.out.println("Tipo de entrada: " + tipoEntradaStr);
+                    System.out.println("Cantidad de entradas: " + cantidadEntradas);
+                    if (esEstudiante == 'S') {
+                        System.out.println("Tipo de cliente: Estudiante");
+                    } else {
+                        System.out.println("Tipo de cliente: Publico general");
+                    }
+                    System.out.println("Total a pagar: $" + totalPagar);
+                }
+
+                case 2 -> continuar = 'N';
+
+                default -> System.out.println("Opcion invalida");
+            }
+        }
+    }
+}
